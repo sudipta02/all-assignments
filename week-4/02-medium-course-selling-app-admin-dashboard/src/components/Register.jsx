@@ -4,6 +4,7 @@ import {
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -106,7 +107,7 @@ const Register = () => {
               {errMsg}
             </p>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="register-form">
               <label htmlFor="username">
                 Username:
                 <FontAwesomeIcon
@@ -228,7 +229,7 @@ const Register = () => {
               <br />
               <span className="line">
                 {/*put router link here*/}
-                <a href="#">Sign In</a>
+                <Link to="/login">Sign In</Link>
               </span>
             </p>
           </section>

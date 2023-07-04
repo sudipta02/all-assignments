@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    color: #fff;
+  font-family: "Nunito", sans-serif;
+  font-size: 22px;
+  color: #fff;
 }
 
 body {
-    min-height: 100vh;
-    background-color: dodgerblue;
+  min-height: 100vh;
+  background-color: dodgerblue;
 }
 
 .App {
@@ -22,61 +22,62 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
   padding: 1rem 0.5rem;
 }
 
 section {
-    width: 100%;
-    max-width: 420px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    justify-self: center;
-    padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  justify-self: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.register-container{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.register-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.landing-container{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.landing-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
 }
 
-a, a:visited {
-    color: #fff;
+a,
+a:visited {
+  color: #fff;
 }
 
 input[type="text"],
 input[type="password"],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;
@@ -92,46 +93,76 @@ button {
 }
 
 .instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
 }
 
 .instructions > svg {
-    margin-right: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 .offscreen {
-    position: absolute;
-    left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .valid {
-    color: limegreen;
-    margin-left: 0.25rem;
+  color: limegreen;
+  margin-left: 0.25rem;
 }
 
 .invalid {
-    color: red;
-    margin-left: 0.25rem;
+  color: red;
+  margin-left: 0.25rem;
 }
 
 .errmsg {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .line {
-    display: inline-block;
+  display: inline-block;
+}
+
+.create-course-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.create-course-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #2f62aa;
+  flex-grow: unset;
+  padding-bottom: 20px;
+  padding-right: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 5px 5px #3670c3;
+}
+
+form label span {
+  display: inline-block;
+  width: 200px;
+}
+
+.create-course-form input {
+  width: 300px;
+  height: 40px;
 }
