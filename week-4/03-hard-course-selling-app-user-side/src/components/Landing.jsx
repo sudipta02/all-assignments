@@ -6,7 +6,7 @@ function Landing() {
   return (
     <div className="landing-container">
       <h1>Welcome to course selling website!</h1>
-      <h2 style={{ marginBottom: "30px" }}>Admin side</h2>
+      <h2 style={{ marginBottom: "30px" }}>User side</h2>
       <a href="/register">Register</a>
       <a href="/login">Login</a>
     </div>
