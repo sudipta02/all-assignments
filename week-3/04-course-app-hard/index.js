@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
 const adminSchema = new mongoose.Schema({
   username: String,
   password: String,
+  fullname: String,
 });
 
 const courseSchema = new mongoose.Schema({
@@ -58,15 +59,19 @@ mongoose.connect(
 );
 
 app.post("/admin/signup", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, fullname } = req.body;
   function callback(admin) {
     if (admin) {
       res.status(403).json({ message: "Admin already exists" });
     } else {
-      const obj = { username: username, password: password };
+      const obj = {
+        username: username,
+        password: password,
+        fullname: fullname,
+      };
       const newAdmin = new Admin(obj);
       newAdmin.save();
-      const token = jwt.sign({ username, role: "admin" }, SECRET, {
+      const token = jwt.sign({ username, role: "admin", fullname }, SECRET, {
         expiresIn: "1h",
       });
       res.json({ message: "Admin created successfully", token });
@@ -78,8 +83,9 @@ app.post("/admin/signup", (req, res) => {
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.headers;
   const admin = await Admin.findOne({ username, password });
+  const fullname = admin.fullname;
   if (admin) {
-    const token = jwt.sign({ username, role: "admin" }, SECRET, {
+    const token = jwt.sign({ username, role: "admin", fullname }, SECRET, {
       expiresIn: "1h",
     });
     res.json({ message: "Logged in successfully", token });

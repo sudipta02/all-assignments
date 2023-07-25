@@ -20,6 +20,7 @@ const Register = () => {
   const errRef = useRef();
 
   const [user, setUser] = useState("");
+  const [fullname, setFullname] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
@@ -69,6 +70,7 @@ const Register = () => {
         body: JSON.stringify({
           username: user,
           password: pwd,
+          fullname: fullname,
         }),
       });
 
@@ -86,7 +88,7 @@ const Register = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/about");
+        navigate("/admin/about");
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -101,6 +103,7 @@ const Register = () => {
       }
       //clear state and controlled inputs
       //need value attrib on inputs for this
+      setFullname("");
       setUser("");
       setPwd("");
       setMatchPwd("");
@@ -128,6 +131,16 @@ const Register = () => {
         </p>
         <h1>Register</h1>
         <form onSubmit={handleSubmit} className="register-form">
+          <label htmlFor="fullname">Full name:</label>
+          <input
+            type="text"
+            id="fullname"
+            autoComplete="off"
+            onChange={(e) => setFullname(e.target.value)}
+            value={fullname}
+            required
+          />
+
           <label htmlFor="username">
             Username:
             <FontAwesomeIcon

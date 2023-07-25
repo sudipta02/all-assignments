@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { backendUrl } from "../../constants";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CourseForm = () => {
   const [courseData, setCourseData] = useState({
@@ -9,10 +12,61 @@ const CourseForm = () => {
     published: false,
   });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you can handle the form submission, for now, let's just log the data
     console.log(courseData);
+    const adminToken = localStorage.getItem("adminToken");
+    try {
+      const response = await fetch(`${backendUrl}/admin/courses`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: `Bearer ${adminToken}`,
+        },
+        body: JSON.stringify(courseData),
+      });
+
+      const json = await response.json();
+      console.log(json);
+      if (response.status !== 403) {
+        toast.success(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate("/admin/about");
+      } else {
+        toast.error(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+
+      setCourseData({
+        title: "",
+        description: "",
+        price: 0,
+        imageLink: "",
+        published: false,
+      });
+    } catch (err) {
+      console.log({ err });
+    }
   };
 
   const handleChange = (e) => {

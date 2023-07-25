@@ -60,6 +60,14 @@ section {
   flex-direction: column;
 }
 
+.about-container {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -168,17 +176,20 @@ form label span {
 }
 
 .course-card {
-  width: 252px;
-  height: 265px;
-  background: white;
+  position: relative;
+  width: 300px;
+  height: 350px;
   border-radius: 30px;
+  border: 2px solid #2f62aa;
+  box-shadow: 10px 5px 5px #3670c3;
 }
 .course-img {
   width: 100%;
   height: 50%;
+  object-fit: cover;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  background: linear-gradient(#e66465, #9198e5);
+  background: white;
   display: flex;
   align-items: top;
   justify-content: right;
@@ -194,9 +205,10 @@ form label span {
 
 .course-info p {
   font-size: medium;
+  color: white;
 }
 
-.courses-list-container{
+.courses-list-container {
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);

@@ -49,7 +49,7 @@ const Login = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/about");
+        navigate("/admin/about");
       } else {
         toast.error(json.message, {
           position: "top-right",
