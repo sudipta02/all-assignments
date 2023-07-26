@@ -44,7 +44,7 @@ function ShowCourses() {
     getCourses();
   }, []);
   return (
-    <div style={{ overflow: "auto" }}>
+    <div>
       <h1 style={{ marginTop: "20px", marginLeft: "20px" }}>
         Course list page
       </h1>

@@ -209,8 +209,13 @@ form label span {
 }
 
 .courses-list-container {
-  padding: 20px;
+  margin-bottom: 50px;
+  padding-left: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 1.5rem;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
