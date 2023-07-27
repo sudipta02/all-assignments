@@ -20,10 +20,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/route" element={<NavDrawer />} />
-        <Route path="admin" element={<AppBar />}>
+        <Route path="admin" element={<NavDrawer />}>
           <Route path="about" element={<About />} />
           <Route path="create-course" element={<CreateCourse />} />
           <Route path="courses" element={<ShowCourses />} />
+          {/* <Route path="edit-course" element={}/> */}
         </Route>
       </Routes>
     </Router>

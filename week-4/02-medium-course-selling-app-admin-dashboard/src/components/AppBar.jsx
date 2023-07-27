@@ -28,6 +28,7 @@ export default function AppBar() {
   const handleShowCourses = () => {
     navigate("/admin/courses");
   };
+
   return (
     <>
       <div
