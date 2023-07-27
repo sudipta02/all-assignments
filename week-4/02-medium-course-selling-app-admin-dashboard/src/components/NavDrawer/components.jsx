@@ -30,6 +30,7 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   padding: theme.spacing(0, 1),
+  // background: "#1e90ff",
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
@@ -37,6 +38,9 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
+  "& .MuiToolbar-root": {
+    backgroundColor: "#125699",
+  },
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -59,6 +63,9 @@ export const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
+  "& .MuiDrawer-paper": {
+    backgroundColor: "#1e90ff",
+  },
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),

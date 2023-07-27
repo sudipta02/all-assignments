@@ -24,7 +24,10 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="create-course" element={<CreateCourse />} />
           <Route path="courses" element={<ShowCourses />} />
-          {/* <Route path="edit-course" element={}/> */}
+          <Route
+            path="edit-course/:_id"
+            element={<CreateCourse update={true} />}
+          />
         </Route>
       </Routes>
     </Router>

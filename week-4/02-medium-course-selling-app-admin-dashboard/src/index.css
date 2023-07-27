@@ -9,7 +9,6 @@
 html {
   font-family: "Nunito", sans-serif;
   font-size: 22px;
-  color: #fff;
 }
 
 body {
@@ -223,4 +222,12 @@ body::-webkit-scrollbar {
 .logo {
   width: 180px;
   height: 30px;
+}
+
+.MuiDrawer-paper.MuiPaper-root {
+  background-color: #125699 !important;
+}
+
+h1, span {
+  color: #fff !important;
 }

@@ -6,8 +6,10 @@ function About() {
   console.log({ admin });
   return (
     <div className="about-container">
-      <h1>Hey👋, {admin.fullname}</h1>
-      <h2 style={{ marginBottom: "30px" }}>Welcome to your dashboard</h2>
+      <h1 style={{ color: "#fff" }}>Hey👋, {admin.fullname}</h1>
+      <h2 style={{ marginBottom: "30px", color: "#fff" }}>
+        Welcome to your dashboard
+      </h2>
     </div>
   );
 }

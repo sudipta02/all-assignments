@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { backendUrl } from "../../constants";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const CourseForm = () => {
-  const [courseData, setCourseData] = useState({
-    title: "",
-    description: "",
-    price: 0,
-    imageLink: "",
-    published: false,
-  });
+const CourseForm = ({ _id, update }) => {
+  const location = useLocation();
+  // const { title, price, description, imageLink, published } = location.state;
+  // const [courseData, setCourseData] = useState({
+  //   title: "",
+  //   description: "",
+  //   price: 0,
+  //   imageLink: "",
+  //   published: false,
+  // });
+
+  const [courseData, setCourseData] = useState(location.state);
 
   const navigate = useNavigate();
 
@@ -19,53 +23,104 @@ const CourseForm = () => {
     // Here you can handle the form submission, for now, let's just log the data
     console.log(courseData);
     const adminToken = localStorage.getItem("adminToken");
-    try {
-      const response = await fetch(`${backendUrl}/admin/courses`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          authorization: `Bearer ${adminToken}`,
-        },
-        body: JSON.stringify(courseData),
-      });
+    if (update) {
+      try {
+        const response = await fetch(`${backendUrl}/admin/courses/${_id}`, {
+          method: "PUT",
+          headers: {
+            // Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify(courseData),
+        });
 
-      const json = await response.json();
-      console.log(json);
-      if (response.status !== 403) {
-        toast.success(json.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        const json = await response.json();
+        console.log(json);
+        if (response.status !== 403) {
+          toast.success(json.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("/admin/about");
+        } else {
+          toast.error(json.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+
+        setCourseData({
+          title: "",
+          description: "",
+          price: 0,
+          imageLink: "",
+          published: false,
         });
-        navigate("/admin/about");
-      } else {
-        toast.error(json.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+      } catch (err) {
+        console.log({ err });
       }
+    } else {
+      try {
+        const response = await fetch(`${backendUrl}/admin/courses`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify(courseData),
+        });
 
-      setCourseData({
-        title: "",
-        description: "",
-        price: 0,
-        imageLink: "",
-        published: false,
-      });
-    } catch (err) {
-      console.log({ err });
+        const json = await response.json();
+        console.log(json);
+        if (response.status !== 403) {
+          toast.success(json.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("/admin/about");
+        } else {
+          toast.error(json.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+
+        setCourseData({
+          title: "",
+          description: "",
+          price: 0,
+          imageLink: "",
+          published: false,
+        });
+      } catch (err) {
+        console.log({ err });
+      }
     }
   };
 
@@ -135,7 +190,7 @@ const CourseForm = () => {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit">{update ? "Update course" : "Submit"}</button>
       </form>
     </div>
   );

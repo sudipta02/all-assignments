@@ -13,6 +13,7 @@ import {
   faArrowLeft,
   faSquarePlus,
   faPenToSquare,
+  faTableColumns,
 } from "@fortawesome/free-solid-svg-icons";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -22,7 +23,7 @@ import Logo from "../../assets/logo.png";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AppBar, Drawer, DrawerHeader } from "./components";
 import jwtDecode from "jwt-decode";
-import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
 export default function NavDrawer() {
   const theme = useTheme();
@@ -54,6 +55,18 @@ export default function NavDrawer() {
     setOpen(false);
   };
 
+  const handleDrawerMenu = (index) => {
+    if (index === 0) {
+      navigate("/admin/about");
+    }
+    if (index === 1) {
+      navigate("/admin/courses");
+    }
+    if (index === 2) {
+      navigate("/admin/create-course");
+    }
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -80,9 +93,11 @@ export default function NavDrawer() {
               alignItems: "center",
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <p>dSHJHJXS</p>
-              <button>Logout</button>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <p>{admin.username}</p>
+              <button style={{ marginTop: "0" }} onClick={handleLogout}>
+                Logout
+              </button>
             </Box>
           </Box>
         </Toolbar>
@@ -94,13 +109,13 @@ export default function NavDrawer() {
             {theme.direction === "rtl" ? (
               <FontAwesomeIcon icon={faArrowRight} size="2xs" />
             ) : (
-              <FontAwesomeIcon icon={faArrowLeft} size="2xs" />
+              <FontAwesomeIcon icon={faArrowLeft} size="2xs" color="#fff" />
             )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Dashboard", "All Courses", "Create Course"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -108,27 +123,39 @@ export default function NavDrawer() {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                 }}
+                onClick={() => handleDrawerMenu(index)}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "#fff",
                   }}
                 >
-                  {index % 2 === 0 ? (
-                    <FontAwesomeIcon icon={faSquarePlus} />
-                  ) : (
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  )}
+                  {index === 0 && <FontAwesomeIcon icon={faTableColumns} />}
+                  {index === 1 && <FontAwesomeIcon icon={faPenToSquare} />}
+                  {index === 2 && <FontAwesomeIcon icon={faSquarePlus} />}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={text}
+                  sx={{ opacity: open ? 1 : 0, color: "#fff" }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "#1e90ff",
+          width: "100%",
+          height: "100%",
+        }}
+      >
         <DrawerHeader />
         <Outlet />
       </Box>

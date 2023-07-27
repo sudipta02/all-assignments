@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { backendUrl } from "../../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const coursesTemp = [
   {
@@ -43,6 +44,7 @@ function ShowCourses() {
     }
     getCourses();
   }, []);
+
   return (
     <div>
       <h1 style={{ marginTop: "20px", marginLeft: "20px" }}>
@@ -52,6 +54,7 @@ function ShowCourses() {
         {courses.map((c, i) => (
           <Course
             key={i}
+            _id={c._id}
             title={c.title}
             description={c.description}
             price={c.price}
@@ -65,7 +68,14 @@ function ShowCourses() {
 }
 
 function Course(props) {
-  const { title, description, price, imageLink, published } = props;
+  const { _id, title, description, price, imageLink, published } = props;
+  const navigate = useNavigate();
+  const handleEditCourse = (_id) => {
+    navigate(`/admin/edit-course/${_id}`, {
+      state: { title, description, price, imageLink, published },
+    });
+  };
+
   return (
     <div className="course-card">
       <img src={imageLink} className="course-img" />
@@ -85,6 +95,7 @@ function Course(props) {
           bottom: "30px",
           right: "30px",
         }}
+        onClick={() => handleEditCourse(_id)}
       >
         <FontAwesomeIcon icon={faPenToSquare} />
       </button>

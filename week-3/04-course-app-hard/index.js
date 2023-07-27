@@ -83,8 +83,9 @@ app.post("/admin/signup", (req, res) => {
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.headers;
   const admin = await Admin.findOne({ username, password });
-  const fullname = admin.fullname;
+  
   if (admin) {
+    const fullname = admin.fullname;
     const token = jwt.sign({ username, role: "admin", fullname }, SECRET, {
       expiresIn: "1h",
     });
