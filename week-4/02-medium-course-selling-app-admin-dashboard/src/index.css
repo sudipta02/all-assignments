@@ -219,3 +219,8 @@ form label span {
 body::-webkit-scrollbar {
   display: none;
 }
+
+.logo {
+  width: 180px;
+  height: 30px;
+}
