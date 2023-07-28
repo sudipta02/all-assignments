@@ -9,7 +9,7 @@ function CreateCourse({ update }) {
       <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
         {update ? "Update" : "Create"} Course Page
       </h1>
-      <CourseForm _id={_id} update />
+      <CourseForm _id={_id} update={update} />
     </div>
   );
 }

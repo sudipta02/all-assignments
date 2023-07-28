@@ -6,17 +6,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../../../02-medium-course-selling-app-admin-dashboard/constants";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
 
 const Register = () => {
+  const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
 
   const [user, setUser] = useState("");
+  const [fullname, setFullname] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
@@ -58,20 +62,49 @@ const Register = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ user, pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
-      setSuccess(true);
+      const response = await fetch(`${backendUrl}/users/signup`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: user,
+          password: pwd,
+          fullname: fullname,
+        }),
+      });
+
+      const json = await response.json();
+      console.log(json);
+      if (response.status !== 403) {
+        localStorage.setItem("userToken", json.token);
+        toast.success(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate("/user/about");
+      } else {
+        toast.error(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
       //clear state and controlled inputs
       //need value attrib on inputs for this
+      setFullname("");
       setUser("");
       setPwd("");
       setMatchPwd("");
@@ -108,6 +141,15 @@ const Register = () => {
             </p>
             <h1>Register</h1>
             <form onSubmit={handleSubmit} className="register-form">
+              <label htmlFor="fullname">Full name:</label>
+              <input
+                type="text"
+                id="fullname"
+                autoComplete="off"
+                onChange={(e) => setFullname(e.target.value)}
+                value={fullname}
+                required
+              />
               <label htmlFor="username">
                 Username:
                 <FontAwesomeIcon

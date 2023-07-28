@@ -1,9 +1,11 @@
 import { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-const LOGIN_URL = "/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { backendUrl } from "../../../02-medium-course-selling-app-admin-dashboard/constants";
 
 const Login = () => {
+  const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -24,20 +26,46 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ user, pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
+      const response = await fetch(`${backendUrl}/users/login`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          username: user,
+          password: pwd,
+        },
+      });
+
+      const json = await response.json();
+      console.log(json);
+      if (response.status !== 403) {
+        localStorage.setItem("userToken", json.token);
+        toast.success(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate("/user/about");
+      } else {
+        toast.error(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
 
       setUser("");
       setPwd("");
-      setSuccess(true);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

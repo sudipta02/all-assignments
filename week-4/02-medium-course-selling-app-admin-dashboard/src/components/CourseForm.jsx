@@ -5,16 +5,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const CourseForm = ({ _id, update }) => {
   const location = useLocation();
-  // const { title, price, description, imageLink, published } = location.state;
-  // const [courseData, setCourseData] = useState({
-  //   title: "",
-  //   description: "",
-  //   price: 0,
-  //   imageLink: "",
-  //   published: false,
-  // });
+  const initialCourseData = update
+    ? location.state
+    : {
+        title: "",
+        description: "",
+        price: 0,
+        imageLink: "",
+        published: false,
+      };
 
-  const [courseData, setCourseData] = useState(location.state);
+  const [courseData, setCourseData] = useState(initialCourseData);
 
   const navigate = useNavigate();
 

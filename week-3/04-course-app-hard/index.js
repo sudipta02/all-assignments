@@ -13,6 +13,7 @@ const SECRET = "SECr3t"; // This should be in an environment variable in a real 
 const userSchema = new mongoose.Schema({
   username: { type: String },
   password: String,
+  fullname: String,
   purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 });
 
@@ -83,7 +84,7 @@ app.post("/admin/signup", (req, res) => {
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.headers;
   const admin = await Admin.findOne({ username, password });
-  
+
   if (admin) {
     const fullname = admin.fullname;
     const token = jwt.sign({ username, role: "admin", fullname }, SECRET, {
@@ -119,14 +120,14 @@ app.get("/admin/courses", authenticateJwt, async (req, res) => {
 
 // User routes
 app.post("/users/signup", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, fullname } = req.body;
   const user = await User.findOne({ username });
   if (user) {
     res.status(403).json({ message: "User already exists" });
   } else {
-    const newUser = new User({ username, password });
+    const newUser = new User({ username, password, fullname });
     await newUser.save();
-    const token = jwt.sign({ username, role: "user" }, SECRET, {
+    const token = jwt.sign({ username, role: "user", fullname }, SECRET, {
       expiresIn: "1h",
     });
     res.json({ message: "User created successfully", token });
@@ -137,7 +138,8 @@ app.post("/users/login", async (req, res) => {
   const { username, password } = req.headers;
   const user = await User.findOne({ username, password });
   if (user) {
-    const token = jwt.sign({ username, role: "user" }, SECRET, {
+    const fullname = user.fullname;
+    const token = jwt.sign({ username, role: "user", fullname }, SECRET, {
       expiresIn: "1h",
     });
     res.json({ message: "Logged in successfully", token });
