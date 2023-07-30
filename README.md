@@ -1,4 +1,4 @@
-Generics: 
+**Generics**: 
 Generics refer to a programming concept that allows the creation of classes, interfaces, or
 methods that can work with different data types while maintaining type safety. In other
 words, generics provide a way to write reusable code that can operate on various data types I
@@ -25,4 +25,15 @@ function swap<T, U>(a: T, b: U):[U,T] {
 return [b, a]
 <br/>
 }
+
+**Partials**:
+```
+interface Todo {
+title: string;
+description: string;
+id: number;
+done: boolean;
+}
+type UpdateTodoInput = Partial<Todo>
+```
 
