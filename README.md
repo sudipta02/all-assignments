@@ -37,3 +37,9 @@ done: boolean;
 type UpdateTodoInput = Partial<Todo>
 ```
 
+**tsconfig.json**
+```
+"rootDir": "src",
+"outDir": "dist",
+"declaration": true //creates .d.ts files
+```
