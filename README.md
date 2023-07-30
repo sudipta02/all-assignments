@@ -5,9 +5,17 @@ words, generics provide a way to write reusable code that can operate on various
 without sacrificing type checking at compile time.
 
 Example:
-function swap<T>(a: T, b: T):[T,T]{
+function swap<T>(a: T, b: T):[T,T] {
+<br/>
 return [b,a]
+<br/>
 }
+<br/>
 const swap2 = <T>(a: T, b: T):[T,T] => return [b, a];
-
+<br/>
+function swap<T, U>(a: T, b: U):[U,T] {
+<br/>
+return [b, a]
+<br/>
+}
 
