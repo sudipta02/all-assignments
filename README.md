@@ -8,5 +8,6 @@ Example:
 function swap<T>(a: T, b: T):[T,T]{
 return [b,a]
 }
+const swap2 = <T>(a: T, b: T):[T,T] => return [b, a];
 
 
