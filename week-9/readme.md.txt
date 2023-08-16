@@ -41,3 +41,14 @@ ssh -t -i "cert-file.cer" ubuntu@ec2-url  "sudo bash ~/deploy.sh"
 Github Actions setup for continuous integration:
 1. Create new repo
 2. git remote add origin2 <github_https_ssh_link>
+3. git push origin2 <repo_name>
+
+nginx setup
+1. sudo apt-get install nginx - Install nginx
+2. sudo vi /etc/nginx/nginx.conf - open nginx.conf file
+3. sudo rm /etc/nginx/nginx.conf - Delete the existing nginx.conf file
+4. sudo nginx -s reload
+
+make http port secure with certbot(free):
+1. sudo snap install --classic certbot
+2. sudo certbot --nginx
