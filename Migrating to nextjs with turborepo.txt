@@ -1,0 +1,19 @@
+Migrating to nextjs with turborepo
+1. npx create-turbo@latest (Name the repo)
+2. For creating a new ui repo - npx create-next-app@latest inside apps folder
+3. Add in package.json of new client repo
+"dependencies": {
+    "ui": "*"
+  }
+4. Add in next.config.js of new client repo
+{
+  reactStrictMode: true,
+  transpilePackages: ["ui"],
+};
+Backend setup in monorepo
+5. mkdir db inside packages folder
+6. npm init -y, tsc --init to create tsconfig.json
+7. Add in package.json
+"main": "src/",
+"": "src/"
+
