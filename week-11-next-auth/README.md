@@ -4,4 +4,4 @@ Use next-auth to build google and simple auth
 - Create Credentials - Create Oauth client id
 - After generating the client id and client secret, copy those to the .env.local file to NEXT_GOOGLE_CLIENT_ID and NEXT_GOOGLE_CLIENT_SECRET
 - NEXTAUTH_SECRET has to be generated this cmd: openssl rand -base64 32
-- [...nextauth].ts will serve requests for routes /api/auth/...
+- All routes like /api/auth/*... will come to [...nextauth].ts
