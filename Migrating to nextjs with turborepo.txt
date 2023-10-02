@@ -17,4 +17,6 @@ Backend setup in monorepo
 "main": "src/",
 "": "src/"
 8. Always good to do npm install and npm build at the root folder after any changes made in sub repos.
+9. The apps folder contains client-next, docs, web, express-backend. They all do their transpiling for themselves. That means web will do transpiling of typescript to js only for its use. Similarly, docs, client-next, express-backend will do their individual transipling. 
+10. So, what do they transpile exactly ? They transiple the code they need from the packages folder which resides inside the root.
 
