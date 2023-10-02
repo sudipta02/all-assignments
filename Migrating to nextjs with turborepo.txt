@@ -16,4 +16,5 @@ Backend setup in monorepo
 7. Add in package.json
 "main": "src/",
 "": "src/"
+8. Always good to do npm install and npm build at the root folder after any changes made in sub repos.
 
