@@ -1,6 +1,8 @@
 ssh -i <name_of_cer_file> ubuntu@<public_ipv4_dns>
 ssh -i todo-app.pem ubuntu@ec2-16-171-43-15.eu-north-1.compute.amazonaws.com
 
+Note: Whoever has access to the cert file will be able to access your aws server. This cert file is generated during the aws ec2 instance setup.
+
 chmod 600 ./todo-app.cer
 
 install node on ubuntu (nvm)
