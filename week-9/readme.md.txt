@@ -54,3 +54,17 @@ nginx setup
 make http port secure with certbot(free):
 1. sudo snap install --classic certbot
 2. sudo certbot --nginx
+
+
+High level steps
+The dumb way to deploy
+l. Choosing a cloud provider (AWS/GCP/Azure)
+2. Creating an instance
+3. Getting an ssh key
+4. Opening firewalls on the machine on port 80/443/22(3000/3001?)
+5. Cloning your code to the machine
+6. Installing node/npm (why docker is useful?)
+7. Building and running your code(pm2?)
+8. Pointing your domain to the server
+9. Using nginx to setup a reverse proxy
+10. Certificate management
