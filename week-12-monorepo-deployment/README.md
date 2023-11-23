@@ -4,17 +4,16 @@ The monorepo contains
  - A React frontend
  - A Next frontend
 
-
- ## Initial deploy
- 
- ```
-    pm2 start npm --name "react" -- run "start:react"
- ```
-
- ```
-    pm2 start npm --name "next" -- run "start:next"
- ```
-
- ```
-    pm2 start npm --name "express" -- run "start:express"
- ```
+Steps to deploy the monorepo:
+Create ec2 server
+Download cert file from ec2 dashboard
+ssh into the server
+Install node, npm, yarn
+Install nginx
+Install pm2
+Install certbot
+Copy over nginx file
+Install certificates
+Clone the repo
+yarn install
+Run 3 pm2 jobs
