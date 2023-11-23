@@ -1,1 +1,0 @@
-CREATE TABLE "appstore"."pending_curator_reviews" ("id" serial NOT NULL, "created_at" timestamptz NOT NULL, "type" text NOT NULL, "authority" text NOT NULL, "xnft" text NOT NULL, "data" jsonb NOT NULL, PRIMARY KEY ("id","xnft") , UNIQUE ("id"), UNIQUE ("xnft"));

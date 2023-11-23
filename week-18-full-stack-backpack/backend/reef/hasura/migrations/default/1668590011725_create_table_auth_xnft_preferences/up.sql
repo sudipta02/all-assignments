@@ -1,1 +1,0 @@
-CREATE TABLE "auth"."xnft_preferences" ("id" text NOT NULL, "username" text NOT NULL, "uuid" text, "notifications" boolean NOT NULL, "media" boolean NOT NULL, "xnft_id" boolean NOT NULL, PRIMARY KEY ("id") );

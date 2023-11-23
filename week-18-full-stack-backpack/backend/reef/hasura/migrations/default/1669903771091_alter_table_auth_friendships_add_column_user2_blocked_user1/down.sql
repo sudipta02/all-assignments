@@ -1,4 +1,0 @@
--- Could not auto-generate a down migration.
--- Please write an appropriate down migration for the SQL below:
--- alter table "auth"."friendships" add column "user2_blocked_user1" boolean
---  not null default 'false';
